@@ -1,0 +1,103 @@
+/* ============ Surpresa romântica — style.css ============ */
+:root{
+  --vinho:#1d060e; --carmim:#4f0d24; --rosa:#c0607a;
+  --creme:#f7ebe8; --ouro:#d8b27a;
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype",Palatino,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{height:100%;overflow:hidden;background:var(--vinho);color:var(--creme);
+  font-family:var(--serif);touch-action:manipulation}
+body{background:
+  radial-gradient(120% 80% at 50% 0%,#5a1229 0%,transparent 60%),
+  radial-gradient(100% 70% at 50% 110%,#3a0a1c 0%,transparent 70%),var(--vinho)}
+
+#stage{position:fixed;inset:0;height:100vh;height:100dvh;z-index:1}
+#dots{position:fixed;inset:0;z-index:0;pointer-events:none}
+#fx{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+
+/* Cenas: ficam empilhadas; só a cena ".on" aparece */
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  padding:max(28px,env(safe-area-inset-top)) 24px max(28px,env(safe-area-inset-bottom));
+  overflow-y:auto;text-align:center;opacity:0;visibility:hidden;
+  transition:opacity 1.4s ease,visibility 0s 1.4s}
+.scene.on{opacity:1;visibility:visible;transition:opacity 1.4s ease}
+.inner{margin:auto;width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center}
+
+@keyframes fade{to{opacity:1}}
+
+/* ---- Cena 0 ---- */
+h1{font-weight:400;font-style:italic;font-size:clamp(1.8rem,8vw,2.6rem);line-height:1.25;
+  margin-bottom:2.6rem;opacity:0}
+.ativa h1{animation:fade 2.4s .3s forwards}
+#open{min-height:54px;padding:.9rem 2.5rem;border-radius:999px;border:1px solid var(--ouro);
+  background:linear-gradient(135deg,#8c1d3f,#5a1029);color:var(--creme);font:inherit;
+  font-size:1.15rem;letter-spacing:.04em;cursor:pointer;opacity:0;
+  animation:fade 1.6s 1.8s forwards,pulse 3.4s 3.4s ease-in-out infinite}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(216,178,122,0),0 0 18px rgba(192,96,122,.25)}
+  50%{box-shadow:0 0 0 8px rgba(216,178,122,.07),0 0 30px rgba(192,96,122,.5)}}
+
+/* ---- Coração com foto ---- */
+.heart{display:block;width:min(80vw,46vh,340px);height:auto;opacity:0;transform:scale(.15);
+  filter:drop-shadow(0 0 22px rgba(216,178,122,.28))}
+.heart.small{width:min(30vw,15vh,150px);margin-bottom:1rem}
+.ativa .heart{animation:grow 2.6s cubic-bezier(.2,.8,.2,1) forwards,glow 4s 2.6s ease-in-out infinite}
+@keyframes grow{to{transform:scale(1);opacity:1}}
+@keyframes glow{50%{filter:drop-shadow(0 0 34px rgba(216,178,122,.45))}}
+.frase{margin-top:1.8rem;font-style:italic;font-size:clamp(1.15rem,5vw,1.5rem);line-height:1.5;
+  max-width:20em;opacity:0}
+.ativa .frase{animation:fade 2s 2.2s forwards}
+
+/* ---- Buquê ---- */
+.bouquet{display:block;overflow:visible;width:min(72vw,calc(46vh * 200 / 280),300px);height:auto;
+  filter:drop-shadow(0 0 16px rgba(192,96,122,.2))}
+.stem{fill:none;stroke:#46664f;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.ativa .stem{animation:draw 2.4s ease-out var(--d) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.leaf{fill:#3d5a47;opacity:0;transform-box:fill-box;transform-origin:center bottom}
+.ativa .leaf{animation:pop 1.6s ease-out var(--d) forwards}
+@keyframes pop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+.wrap{opacity:0}
+.ativa .wrap{animation:fade 1.6s 1.6s forwards}
+.flower{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(0) rotate(-40deg)}
+.ativa .flower{animation:bloom 2.8s cubic-bezier(.2,.9,.25,1) var(--d) forwards}
+@keyframes bloom{to{opacity:1;transform:scale(1) rotate(0)}}
+
+/* ---- Mensagem ---- */
+.msg p{font-size:clamp(1.05rem,4.5vw,1.3rem);line-height:1.75;margin-bottom:1.4rem;
+  opacity:0;filter:blur(6px);transform:translateY(8px);
+  transition:opacity 2.2s ease,filter 2.2s ease,transform 2.2s ease}
+.msg p.show{opacity:1;filter:none;transform:none}
+.msg p.nome{color:var(--ouro);font-style:italic;font-size:clamp(1.3rem,5.6vw,1.6rem)}
+
+/* ---- Final ---- */
+.final>*{opacity:0}
+.ativa .final>*{animation:fade 2s forwards}
+.final h2{font-weight:400;font-size:clamp(2.2rem,11vw,3.4rem);line-height:1.2;animation-delay:.4s}
+.fio{display:block;width:48px;height:1px;background:var(--ouro);margin:1.5rem auto;animation-delay:1.4s}
+#assina{font-style:italic;font-size:1.15rem;color:var(--ouro);animation-delay:2s}
+#de{margin-top:.8rem;font-size:1.05rem;animation-delay:2.8s}
+#data{margin-top:.4rem;font-size:.95rem;opacity:.7;animation-delay:3.2s}
+
+/* ---- Efeitos: pontinhos, pétalas, corações subindo ---- */
+.dot{position:absolute;border-radius:50%;background:var(--ouro);opacity:.1;
+  animation:tw var(--t) var(--d) ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.08}50%{opacity:.65}}
+.petal{position:absolute;top:0;border-radius:100% 0 100% 0;opacity:.8;
+  background:linear-gradient(135deg,#d77a92,#8c1d3f);animation:fall linear forwards}
+@keyframes fall{from{transform:translate3d(0,-6vh,0) rotate(0)}
+  to{transform:translate3d(var(--dx),108vh,0) rotate(var(--r))}}
+.rise{position:absolute;bottom:-30px;color:var(--rosa);animation:rise var(--t) ease-in forwards}
+@keyframes rise{from{transform:translateY(0);opacity:0}15%{opacity:.75}
+  to{transform:translateY(-115vh) translateX(var(--dx));opacity:0}}
+
+/* ---- Botão de música ---- */
+#som{position:fixed;z-index:3;top:max(12px,env(safe-area-inset-top));right:12px;width:44px;height:44px;
+  border-radius:50%;border:1px solid rgba(216,178,122,.45);background:rgba(0,0,0,.25);
+  color:var(--creme);font-size:18px;cursor:pointer}
+#som.mudo{opacity:.45;text-decoration:line-through}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-delay:0s!important;
+    animation-iteration-count:1!important;transition-duration:.01ms!important}}

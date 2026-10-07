@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1d060e">
+  <title>Pra você</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Pontinhos de luz ao fundo (criados pelo script.js) -->
+  <div id="dots" aria-hidden="true"></div>
+
+  <main id="stage">
+    <!-- CENA 0: introdução -->
+    <section class="scene on ativa" id="cena0">
+      <div class="inner">
+        <h1 id="intro"></h1>
+        <button id="open" type="button">Abrir ❤️</button>
+      </div>
+    </section>
+
+    <!-- CENA 1: coração com a foto -->
+    <section class="scene" id="cena1">
+      <div class="inner">
+        <div id="heart1"></div>
+        <p class="frase" id="frase"></p>
+      </div>
+    </section>
+
+    <!-- CENA 2: buquê florescendo -->
+    <section class="scene" id="cena2">
+      <div class="inner">
+        <div id="heart2"></div>
+        <svg class="bouquet" id="buque" viewBox="0 0 200 280" aria-hidden="true"></svg>
+      </div>
+    </section>
+
+    <!-- CENA 3: mensagem (preenchida pelo script.js) -->
+    <section class="scene" id="cena3">
+      <div class="inner msg" id="msg"></div>
+    </section>
+
+    <!-- CENA 4: final -->
+    <section class="scene" id="cena4">
+      <div class="inner final">
+        <h2 id="fim"></h2>
+        <span class="fio"></span>
+        <p id="assina"></p>
+        <p id="de"></p>
+        <p id="data"></p>
+      </div>
+    </section>
+  </main>
+
+  <div id="fx" aria-hidden="true"></div>
+  <button id="som" type="button" hidden aria-label="Ligar ou desligar a música">♪</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
