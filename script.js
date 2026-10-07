@@ -28,7 +28,7 @@ const TEMPO = {
   coracao: 6500,          // quanto a cena do coração fica na tela (toque avança antes)
   buque: 9500,            // quanto o buquê floresce antes da mensagem
   entreParagrafos: 3600,  // intervalo entre os parágrafos
-  aposMensagem: 5500      // pausa depois do último parágrafo
+  aposMensagem: 6500      // pausa depois do último parágrafo
 };
 
 /* ---------- 3. Utilidades ---------- */
